@@ -1,7 +1,7 @@
 /**
  * File customizer.js.
  *
- * Theme Customizer enhancements for a better user experience.
+ * Theme Customizer enhancements for a better user experience. IsMike
  *
  * Contains handlers to make Theme Customizer preview reload changes asynchronously.
  */
