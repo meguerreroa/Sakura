@@ -104,7 +104,7 @@ mashiro_global.font_control = new function () {
             $(".control-btn-sans-serif").removeClass("selected");
             setCookie("font_family", "serif", 30);
             if (document.body.clientWidth <= 860) {
-                addComment.createButterbar("将从网络加载字体，流量请注意");
+                addComment.createButterbar("Se cargarán fuentes desde internet, espere un momento");
             }
         }
     }
@@ -168,12 +168,12 @@ if (Poi.reply_link_version == 'new'){
 function attach_image() {
     $('#upload-img-file').change(function () {
         if (this.files.length > 10) {
-            addComment.createButterbar("每次上传上限为10张.<br>10 files max per request.");
+            addComment.createButterbar("Sólo se permite subir 10 archivos al tiempo.");
             return 0;
         }
         for (i = 0; i < this.files.length; i++) {
             if (this.files[i].size >= 5242880) {
-                alert('图片上传大小限制为5 MB.\n5 MB max per file.\n\n「' + this.files[i].name + '」\n\n这张图太大啦~\nThis image is too large~');
+                alert('El tamaño máximo permitido es 5 MB.\n\n La imagen 「' + this.files[i].name + '」\n\n es muy grande~');
             }
         }
         for (var i = 0; i < this.files.length; i++) {
@@ -188,7 +188,7 @@ function attach_image() {
                 data: formData,
                 beforeSend: function (xhr) {
                     $('.insert-image-tips').html('<i class="fa fa-spinner rotating" aria-hidden="true"></i>');
-                    addComment.createButterbar("上传中...<br>Uploading...");
+                    addComment.createButterbar("Subiendo...");
                 },
                 success: function (res) {
                     $('.insert-image-tips').html('<i class="fa fa-check" aria-hidden="true"></i>');
@@ -198,12 +198,12 @@ function attach_image() {
                     var get_the_url = res.data.url;
                     $('#upload-img-show').append('<img class="lazyload upload-image-preview" src="https://cdn.jsdelivr.net/gh/moezx/cdn@3.0.2/img/svg/loader/trans.ajax-spinner-preloader.svg" data-src="' + get_the_url + '" onclick="window.open(\'' + get_the_url + '\')" onerror="imgError(this)" />');
                     lazyload();
-                    addComment.createButterbar("图片上传成功~<br>Uploaded successfully~");
+                    addComment.createButterbar("Subido correctamente~");
                     grin(res.data.url.replace('https://i.loli.net/', '{UPLOAD}'), type = 'Img');
                 },
                 error: function () {
                     $('.insert-image-tips').html('<i class="fa fa-times" aria-hidden="true" style="color:red"></i>');
-                    alert("上传失败，请重试.\nUpload failed, please try again.");
+                    alert("Subida fallida, por favor intente de nuevo.");
                     setTimeout(function () {
                         $('.insert-image-tips').html('<i class="fa fa-picture-o" aria-hidden="true"></i>');
                     }, 1000);
@@ -218,7 +218,7 @@ function clean_upload_images() {
 }
 
 function add_upload_tips() {
-    $('<div class="insert-image-tips popup"><i class="fa fa-picture-o" aria-hidden="true"></i><span class="insert-img-popuptext" id="uploadTipPopup">上传图片</span></div><input id="upload-img-file" type="file" accept="image/*" multiple="multiple" class="insert-image-button">').insertAfter($(".form-submit #submit"));
+    $('<div class="insert-image-tips popup"><i class="fa fa-picture-o" aria-hidden="true"></i><span class="insert-img-popuptext" id="uploadTipPopup">Subir imagen</span></div><input id="upload-img-file" type="file" accept="image/*" multiple="multiple" class="insert-image-button">').insertAfter($(".form-submit #submit"));
     attach_image();
     $("#upload-img-file").hover(function () {
         $(".insert-image-tips").addClass("insert-image-tips-hover");
@@ -659,16 +659,16 @@ var pjaxInit = function () {
     console.log($("#myscript").text());
 }
 $(document).on("click", ".sm", function () {
-    var msg = "您真的要设为私密吗？";
+    var msg = "¿Hacer comentario privado?";
     if (confirm(msg) == true) {
         $(this).commentPrivate();
     } else {
-        aler("已取消");
+        aler("Cancelado");
     }
 });
 $.fn.commentPrivate = function () {
     if ($(this).hasClass('private_now')) {
-        alert('您之前已设过私密评论');
+        alert('Ya has hecho un comentario privado antes');
         return false;
     } else {
         $(this).addClass('private_now');
@@ -779,13 +779,13 @@ function add_copyright() {
         if (window.getSelection().toString().length > 30 && mashiro_option.clipboardCopyright) {
             setClipboardText(e);
         }
-        addComment.createButterbar("复制成功！<br>Copied to clipboard successfully!", 1000);
+        addComment.createButterbar("¡Copiado al portapapeles!", 1000);
     });
 
     function setClipboardText(event) {
         event.preventDefault();
-        var htmlData = "# 商业转载请联系作者获得授权，非商业转载请注明出处。<br>" + "# For commercial use, please contact the author for authorization. For non-commercial use, please indicate the source.<br>" + "# 协议(License)：署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0)<br>" + "# 作者(Author)：" + mashiro_option.author_name + "<br>" + "# 链接(URL)：" + window.location.href + "<br>" + "# 来源(Source)：" + mashiro_option.site_name + "<br><br>" + window.getSelection().toString().replace(/\r\n/g, "<br>");;
-        var textData = "# 商业转载请联系作者获得授权，非商业转载请注明出处。\n" + "# For commercial use, please contact the author for authorization. For non-commercial use, please indicate the source.\n" + "# 协议(License)：署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0)\n" + "# 作者(Author)：" + mashiro_option.author_name + "\n" + "# 链接(URL)：" + window.location.href + "\n" + "# 来源(Source)：" + mashiro_option.site_name + "\n\n" + window.getSelection().toString().replace(/\r\n/g, "\n");
+        var htmlData = "# For commercial use, please contact the author for authorization. For non-commercial use, please indicate the source.<br>" + "# License：署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0)<br>" + "# Author：" + mashiro_option.author_name + "<br>" + "# 链接(URL)：" + window.location.href + "<br>" + "# 来源(Source)：" + mashiro_option.site_name + "<br><br>" + window.getSelection().toString().replace(/\r\n/g, "<br>");;
+        var textData = "# For commercial use, please contact the author for authorization. For non-commercial use, please indicate the source.\n" + "# License：署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0)\n" + "# Author：" + mashiro_option.author_name + "\n" + "# 链接(URL)：" + window.location.href + "\n" + "# 来源(Source)：" + mashiro_option.site_name + "\n\n" + window.getSelection().toString().replace(/\r\n/g, "\n");
         if (event.clipboardData) {
             event.clipboardData.setData("text/html", htmlData);
             event.clipboardData.setData("text/plain", textData);
@@ -1346,11 +1346,11 @@ var home = location.href,
                 Siren.spause();
                 $('.video-stu').css({
                     "bottom": "0px"
-                }).html('已暂停 ...');
+                }).html('Pausado...');
             }
         },
         addsource: function () {
-            $('.video-stu').html('正在载入视频 ...').css({
+            $('.video-stu').html('Cargando video...').css({
                 "bottom": "0px"
             });
             var t = Poi.movies.name.split(","),
@@ -1376,7 +1376,7 @@ var home = location.href,
                         _btn.removeClass('videolive');
                         $('.video-stu').css({
                             "bottom": "0px"
-                        }).html('已暂停 ...');
+                        }).html('Pausado...');
                     } else {
                         Siren.splay();
                         _btn.addClass('videolive');
@@ -1536,7 +1536,7 @@ var home = location.href,
                     url: Poi.ajaxurl,
                     data: jQuery(this).serialize() + "&action=ajax_comment",
                     type: jQuery(this).attr('method'),
-                    beforeSend: addComment.createButterbar("提交中(Commiting)...."),
+                    beforeSend: addComment.createButterbar("Haciendo comentario..."),
                     error: function (request) {
                         var t = addComment;
                         t.createButterbar(request.responseText);
@@ -1566,7 +1566,7 @@ var home = location.href,
                                 jQuery('.' + __list).prepend(data);
                             }
                         }
-                        t.createButterbar("提交成功(Succeed)");
+                        t.createButterbar("Succeed");
                         lazyload();
                         code_highlight_style();
                         click_to_view_image();
